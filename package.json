@@ -23,9 +23,10 @@
     "url": "https://github.com/Chris927/ensure-valid-token-middleware/issues"
   },
   "homepage": "https://github.com/Chris927/ensure-valid-token-middleware#readme",
-  "devDependencies": {},
-  "dependencies": {
-    "base64-url": "^2.2.0",
+  "devDependencies": {
     "express": "^4.16.4"
+  },
+  "dependencies": {
+    "base64-url": "^2.2.0"
   }
 }
