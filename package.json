@@ -1,0 +1,26 @@
+{
+  "name": "ensure-valid-token-middleware",
+  "version": "0.0.1",
+  "description": "ExpressJS middleware to validate a JWT token, given a token secret",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Chris927/ensure-valid-token-middleware.git"
+  },
+  "keywords": [
+    "jwt",
+    "expressjs",
+    "middleware",
+    "security",
+    "token"
+  ],
+  "author": "chris@uber5.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chris927/ensure-valid-token-middleware/issues"
+  },
+  "homepage": "https://github.com/Chris927/ensure-valid-token-middleware#readme"
+}
