@@ -1,6 +1,8 @@
+const { ok } = require('assert')
 const { decode, isExpired, isSignatureValid } = require('./verify-jwt-token')
 
 const ensureValidToken = secret => (req, res, next) => {
+  ok(secret, 'Secret not provided')
   const { authorization } = req.headers
   if (!authorization) {
     return next(new Error('Authorization header not found'))
