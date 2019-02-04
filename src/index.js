@@ -5,19 +5,34 @@ const ensureValidToken = secret => (req, res, next) => {
   ok(secret, 'Secret not provided')
   const { authorization } = req.headers
   if (!authorization) {
-    return next(new Error('Authorization header not found'))
+    res.set('WWW-Authenticate', 'Bearer')
+      .status(401).send('Authorization header not found')
+    return
   }
   const match = authorization.match(/^Bearer (.+)$/)
   if (!match || !match[1]) {
-    return next(new Error('Invalid authorization, not a Bearer token'))
+    res.set('WWW-Authenticate', 'Bearer')
+      .status(401).send('Invalid authorization, not a Bearer token')
+    return
   }
   const token = match[1]
-  const decoded = decode(token)
+  let decoded
+  try {
+    decoded = decode(token)
+  } catch (e) {
+    res.set('WWW-Authenticate', 'Bearer error="invalid_token"')
+      .status(401).send(e.message)
+    return
+  }
+
   if (isExpired(decoded)) {
-    throw new Error('Token provided is expired')
+    res.set('WWW-Authenticate', 'Bearer error="invalid_token"')
+      .status(401).send('Token provided is expired')
+    return
   }
   if (!isSignatureValid(decoded, secret)) {
-    throw new Error('Invalid token signature')
+    res.status(403).send('Invalid token signature')
+    return
   }
   return next()
 }
